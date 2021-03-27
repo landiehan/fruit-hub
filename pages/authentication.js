@@ -1,14 +1,21 @@
 import styles from '../styles/Authentication.module.css';
-import Image from 'next/image';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Welcome() {
   const [username, setUsername] = useState('');
 
   const ref = useRef();
+  const imageRef = useRef();
   const router = useRouter();
+
+  const [className, setClassName] = useState(styles.hero_2);
+  useEffect(() => {
+    imageRef.current.onload = () => {
+      setClassName(`${styles.hero_2} ${styles['hero_2--defer']}`);
+    };
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,17 +35,13 @@ export default function Welcome() {
 
       <div className={styles.container_top}>
         <div className={styles.hero}>
-          <div className={styles.hero_1}>
-            <Image src='/images/fruit-drops.png' width='50' height='37' />
-          </div>
+          <img className={styles.hero_1} src='/images/fruit-drops.png' />
 
-          <div className={styles.hero_2}>
-            <Image
-              src='/images/basket-of-fruit-cartoon-2.png'
-              width='301'
-              height='260'
-            />
-          </div>
+          <img
+            ref={imageRef}
+            className={className}
+            src='/images/basket-of-fruit-cartoon-2.png'
+          />
 
           <div className={styles.hero_shadow} />
         </div>

@@ -7,7 +7,7 @@ export default function Splash() {
   useEffect(() => {
     setTimeout(() => {
       router.push('/welcome');
-    }, 4000);
+    }, 3800);
   });
 
   return (

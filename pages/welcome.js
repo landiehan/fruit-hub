@@ -1,9 +1,18 @@
 import styles from '../styles/Welcome.module.css';
 import Link from 'next/link';
-import Image from 'next/image';
 import Head from 'next/head';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Welcome() {
+  const [className, setClassName] = useState(styles.hero_2);
+  const heroRef = useRef();
+
+  useEffect(() => {
+    heroRef.current.onload = () => {
+      setClassName(`${styles.hero_2} ${styles['hero_2--defer']}`);
+    };
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,17 +20,13 @@ export default function Welcome() {
       </Head>
       <div className={styles.container_top}>
         <div className={styles.hero}>
-          <div className={styles.hero_1}>
-            <Image src='/images/fruit-drops.png' width='50' height='37' />
-          </div>
+          <img className={styles.hero_1} src='/images/fruit-drops.png' />
 
-          <div className={styles.hero_2}>
-            <Image
-              src='/images/basket-of-fruit-cartoon.png'
-              width='301'
-              height='260'
-            />
-          </div>
+          <img
+            ref={heroRef}
+            className={className}
+            src='/images/basket-of-fruit-cartoon.png'
+          />
 
           <div className={styles.hero_shadow} />
         </div>
