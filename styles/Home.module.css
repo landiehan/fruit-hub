@@ -136,7 +136,7 @@
   border-radius: 50%;
   opacity: 0;
   transform: scale(0);
-  animation: scale-in 0.3s forwards paused;
+  animation: scale-in 0.8s forwards paused;
 }
 @keyframes scale-in {
   to {

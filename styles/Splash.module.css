@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: center;
   animation: change-bg 1s 2.8s ease-in forwards;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 @keyframes change-bg {
