@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import Image from 'next/image';
+import { useState, useRef, useEffect } from 'react';
 
 const combos = [
   {
@@ -18,6 +18,12 @@ const combos = [
 ];
 
 export default function Home() {
+  const [className, setClassName] = useState(styles.image);
+  const imageRef = useRef();
+  useEffect(() => {
+    setClassName(`${styles.image} ${styles['image--defer']}`);
+  });
+
   return (
     <div className={styles.container}>
       <Head>
@@ -115,13 +121,8 @@ export default function Home() {
           <h2 className={styles.h2}>Recommended Combo</h2>
           <ul className={styles.combos}>
             {combos.map((combo, index) => (
-              <li className={styles.combo}>
-                <Image
-                  src={combo.image}
-                  width='80'
-                  height='80'
-                  className={styles.image}
-                />
+              <li key={index} className={styles.combo}>
+                <img ref={imageRef} src={combo.image} className={className} />
                 <span className={styles.name}>{combo.name}</span>
                 <div className={styles.footer}>
                   <span className={styles.price}>{combo.price}</span>
